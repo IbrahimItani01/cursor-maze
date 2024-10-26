@@ -5,6 +5,7 @@ const body = document.querySelector("body")
 var winMsg = document.createElement("h3");
 
 start.addEventListener("mouseleave", function () {
+  // O(1)
   for (i in boundaries) {
     boundaries[i].addEventListener("mouseenter", function () {
       alert("Game over!");
