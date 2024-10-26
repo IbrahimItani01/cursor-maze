@@ -1,19 +1,26 @@
 const start = document.getElementById("start");
 const end = document.getElementById("end");
-const boundaries = document.querySelectorAll(".boundary");
-const body = document.querySelector("body")
-var winMsg = document.createElement("h3");
+var boundaries = document.querySelectorAll(".boundary");
+var statusH = document.getElementById("status");
 
 start.addEventListener("mouseleave", function () {
+  statusH.innerHTML = 'Game Started!'
   // O(1)
-  for (i in boundaries) {
-    boundaries[i].addEventListener("mouseenter", function () {
-      alert("Game over!");
-      window.location.reload();
-    });
-    end.addEventListener("mouseleave", function () {
-        winMsg.innerText="Congratulations, you won!";
-        body.appendChild(winMsg);
+  
+   boundaries.forEach((boundary)=>{
+     boundary.addEventListener("mouseover", function () {
+        boundary.classList.add("highlighted")
+        statusH.innerHTML = 'You lost'
+        setTimeout(
+          function(){
+              window.location.reload()
+          }
+          ,1000);
+     });
+   }) 
+    end.addEventListener("mouseenter", function () {
+        statusH.innerHTML = 'Congratulations, you won!'
+
         setTimeout(
             function(){
                 window.location.reload()
@@ -21,4 +28,4 @@ start.addEventListener("mouseleave", function () {
             ,3000);
     });
   }
-});
+);
